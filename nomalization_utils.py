@@ -47,6 +47,7 @@ print(train_y.shape)
 
 train_x = np.array(train_x).astype(np.float32)
 train_y = np.array(train_y).astype(np.float32)
-
+train_x=train_x/255
+print(train_x)
 np.save("train_x.npy",train_x)
 np.save("train_y.npy",train_y)
