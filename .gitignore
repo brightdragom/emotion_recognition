@@ -1,3 +1,4 @@
 # 데이터셋은 용량문제로 ReadMe에 추가
 *.csv
 .idea/*
+*.npy
