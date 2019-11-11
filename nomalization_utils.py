@@ -32,9 +32,9 @@ for image,label,usage in test_data:
     test_y.append(label)
 
 # 분류된 데이터셋을 학습을 위해 정규화
-# 이미지는 48*48로 28709개의 2304픽셀을 가진다,즉 shape = (28709,2304)
+# 이미지는 48*48로 28709개
 # 라벨은 1개를 가지고있지만, One-Hot Encoding을 통해 7개중 한개를 가르치는값으로 변경
-# 즉. shape= (28709,7)
+
 #train_x= np.reshape(train_x,(-1,(48,48)))
 #test_x= np.reshape(test_x,(-1,(48,48)))
 
