@@ -15,10 +15,8 @@ def createModel():
     batch_size = 64
     epochs = 100
     width, height = 48, 48
-
     #desinging the CNN
     model = Sequential()
-
     model.add(Conv2D(num_features, kernel_size=(3, 3), activation='relu', input_shape=(width, height, 1), data_format='channels_last', kernel_regularizer=l2(0.01)))
     model.add(Conv2D(num_features, kernel_size=(3, 3), activation='relu', padding='same'))
     model.add(BatchNormalization())
