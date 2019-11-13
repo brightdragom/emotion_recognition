@@ -15,5 +15,5 @@ Requirement|Dataset
 
 
 ## Example
- ![moduleimage](https://github.com/jaehyunup/emotion_recognition/emotion_module.png)
+ ![moduleimage](https://github.com/jaehyunup/emotion_recognition/blob/master/emotio_module.png)
  
