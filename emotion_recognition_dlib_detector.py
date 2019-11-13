@@ -43,9 +43,11 @@ emotion_list = ["Angry", "Disgust", "Fear", "Happy", "Sad", "Surprise", "Neutura
 emotion_dict={"Angry":0,"Disgust":0,"Fear":0,"Happy":0,"Sad":0,"Surprise":0,"Neutural":0}
 
 face_detector = dlib.get_frontal_face_detector()
-cap=cv2.VideoCapture('test_video.mp4')
+cap=cv2.VideoCapture('test_video/speech.mp4')
 while cap.isOpened(): # 캠연결 안되있다고 가정함
     ret,full_size_image = cap.read()
+    # full_size_image = cv2.resize(full_size_image, dsize=(320,320), interpolation=cv2.INTER_AREA)# 정방향 화면입력시
+    full_size_image = cv2.resize(full_size_image, dsize=(180,320), interpolation=cv2.INTER_AREA) #16:9 화면잊ㅂ력시
     # 얼굴영역찾기
     faces=face_detector(full_size_image,1)
     for f in faces: # 얼굴 찾아내기(여려명이 있을수 있음.)
