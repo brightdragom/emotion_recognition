@@ -2,6 +2,5 @@
 .idea/*
 *.jar
 *.mp4
-*.h5
 *.csv
 *.npy
