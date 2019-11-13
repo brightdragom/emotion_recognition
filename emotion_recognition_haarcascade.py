@@ -41,7 +41,7 @@ print("모델 로딩완료")
 
 emotion_list = ["Angry", "Disgust", "Fear", "Happy", "Sad", "Surprise", "Neutral"]
 face_detector = dlib.get_frontal_face_detector()
-cap=cv2.VideoCapture('test_video/surprise.mp4')
+cap=cv2.VideoCapture('test_video.mp4')
 while cap.isOpened(): # 캠연결 안되있다고 가정함
     ret,full_size_image = cap.read()
     # 얼굴영역찾기
@@ -55,7 +55,6 @@ while cap.isOpened(): # 캠연결 안되있다고 가정함
         cropped_face = np.expand_dims(np.expand_dims(cv2.resize(roi_gray, (48, 48)), -1), 0)
         cv2.normalize(cropped_face, cropped_face, alpha=0, beta=1, norm_type=cv2.NORM_L2, dtype=cv2.CV_32F)
         cv2.rectangle(full_size_image, (x, y), (x + w, y + h), (0, 255, 0), 1)
-
         ##predict_classes로 예측하기
         result=model.predict(cropped_face)
         print(result)

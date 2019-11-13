@@ -39,7 +39,9 @@ model = model_from_json(model_json)
 model.load_weights("fer.h5")
 print("모델 로딩완료")
 
-emotion_list = ["Angry", "Disgust", "Fear", "Happy", "Sad", "Surprise", "Neutral"]
+emotion_list = ["Angry", "Disgust", "Fear", "Happy", "Sad", "Surprise", "Neutural"]
+emotion_dict={"Angry":0,"Disgust":0,"Fear":0,"Happy":0,"Sad":0,"Surprise":0,"Neutural":0}
+
 face_detector = dlib.get_frontal_face_detector()
 cap=cv2.VideoCapture('test_video.mp4')
 while cap.isOpened(): # 캠연결 안되있다고 가정함
@@ -54,29 +56,25 @@ while cap.isOpened(): # 캠연결 안되있다고 가정함
         cropped_face = cv2.cvtColor(cropped_face, cv2.COLOR_RGB2GRAY)
         cropped_face = np.expand_dims(np.expand_dims(cv2.resize(cropped_face, (48, 48)), -1), 0)
         cv2.normalize(cropped_face, cropped_face, alpha=0, beta=1, norm_type=cv2.NORM_L2, dtype=cv2.CV_32F)
-        #print(cropped_face.shape)
-        ##predict_classes로 예측하기
         result=model.predict(cropped_face)
-        print(result)
-        #이미지 디스플레이
-        #retemotion=getEmotion(result)
-        #print(retemotion)
-        cv2.putText(full_size_image, emotion_list[int(np.argmax(result))], (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 1, cv2.LINE_AA)
-        #cv2.putText(full_size_image,retemotion,(20,20),cv2.FONT_HERSHEY_SIMPLEX,0.6,(0, 0, 255),1,cv2.LINE_AA)
-        cv2.imshow("show",full_size_image)
-        cv2.moveWindow("show", 1000, 200)
-        #테이블 디스플레이
-        '''
-        fig=plt.figure(figsize=(6,4))
-        ax = fig.add_subplot(111)
-        ypos = np.arange(7)
-        rects = plt.barh(ypos, result, align='center', height=0.35)
-        plt.yticks(ypos, emotion_list)
-        plt.xlabel('emotion percentile')
-        plt.show()
-        '''
+        emotion_str=emotion_list[int(np.argmax(result))]
+        cv2.putText(full_size_image, emotion_str, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 1, cv2.LINE_AA)
+        emotion_dict[emotion_str]+=1
+        print(emotion_dict)
+    cv2.imshow("show",full_size_image)
+    cv2.moveWindow("show", 1000, 200)
+    #테이블 디스플레이
+    '''
+    fig=plt.figure(figsize=(6,4))
+    ax = fig.add_subplot(111)
+    ypos = np.arange(7)
+    rects = plt.barh(ypos, result, align='center', height=0.35)
+    plt.yticks(ypos, emotion_list)
+    plt.xlabel('emotion percentile')
+    plt.show()
+    '''
 
-        if cv2.waitKey(10)==27:
-            cv2.destroyAllWindows()
+    if cv2.waitKey(1)==27:
+        cv2.destroyAllWindows()
 
 
