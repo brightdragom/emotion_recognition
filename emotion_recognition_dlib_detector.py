@@ -11,7 +11,6 @@ def load_model():
     model_json = json_file.read()
     json_file.close()
     model = model_from_json(model_json)
-    # 가중치 업로드
     model.load_weights("fer.h5")
     return model
 
